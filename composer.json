@@ -1,0 +1,35 @@
+{
+	"name" : "rugento/magento2-ioncube-base",
+	"type" : "magento2-module",
+	"version" : "2.2.0",
+	"license" : "MIT",
+	"homepage" : "https://github.com/Rugento/magento2-ioncube-base",
+	"description" : "Ioncube base module for Magento 2",
+	"authors" : [{
+			"name" : "RUGENTO",
+			"email" : "info@rugento.ru",
+			"homepage" : "https://www.rugento.ru/"
+		}
+	],
+	"keywords" : [
+		"magento2",
+		"ioncube"
+	],
+	"require" : {
+		"php" : "7.0.2|7.0.4|~7.0.6|~7.1.0",
+		"magento/framework" : "101.*"
+	},
+	"autoload" : {
+		"files" : [
+			"registration.php"
+		],
+		"psr-4" : {
+			"Ioncube\\Di\\" : ""
+		}
+	},
+	"repositories" : [{
+			"type" : "composer",
+			"url" : "https://repo.magento.com"
+		}
+	]
+}

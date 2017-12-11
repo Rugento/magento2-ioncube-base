@@ -8,6 +8,10 @@ use Magento\Setup\Module\Di\Code\Reader\FileClassScanner;
 
 class ClassesScanner extends \Magento\Setup\Module\Di\Code\Reader\ClassesScanner
 {
+    /**
+     * @var array
+     */
+    protected $excludePatterns = [];
 
     /**
      * @var array
@@ -33,6 +37,17 @@ class ClassesScanner extends \Magento\Setup\Module\Di\Code\Reader\ClassesScanner
     }
 
     /**
+     * Adds exclude patterns
+     *
+     * @param array $excludePatterns
+     * @return void
+     */
+    public function addExcludePatterns(array $excludePatterns)
+    {
+        $this->excludePatterns = array_merge($this->excludePatterns, $excludePatterns);
+    }
+
+    /**
      * Retrieves list of classes for given path
      *
      * @param string $path
@@ -42,7 +57,6 @@ class ClassesScanner extends \Magento\Setup\Module\Di\Code\Reader\ClassesScanner
      */
     public function getList($path)
     {
-
         $realPath = realpath($path);
         $isGeneration = strpos($realPath, $this->generationDirectory) === 0;
 
