@@ -2,14 +2,9 @@
 namespace Ioncube\Di\Code\Setup\Module\Di\Code\Scanner;
 
 use Magento\Setup\Module\Di\Compiler\Log\Log;
-use \Magento\Framework\Reflection\TypeProcessor;
 
 class PhpScanner extends \Magento\Setup\Module\Di\Code\Scanner\PhpScanner
 {
-    /**
-     * @var TypeProcessor
-     */
-    private $typeProcessor;
 
     /**
      * Get classes and interfaces declared in the file
