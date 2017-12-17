@@ -1,7 +1,7 @@
 {
 	"name" : "rugento/magento2-ioncube-base",
 	"type" : "magento2-module",
-	"version" : "2.1.0",
+	"version" : "2.1.1",
 	"license" : "MIT",
 	"homepage" : "https://github.com/Rugento/magento2-ioncube-base",
 	"description" : "Ioncube base module for Magento 2",
