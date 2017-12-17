@@ -68,15 +68,6 @@ class ClassesScanner extends \Magento\Setup\Module\Di\Code\Reader\ClassesScanner
             throw new FileSystemException(new \Magento\Framework\Phrase('Invalid path: %1', [$path]));
         }
 
-        //XXX
-        if(is_file($path.DIRECTORY_SEPARATOR.'classmap.csv')) {
-            $data = file_get_contents($path.DIRECTORY_SEPARATOR.'classmap.csv');
-            if($data !== false) {
-                return explode(':', trim($data));
-            }
-        }
-        //XXX
-
         $recursiveIterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($realPath, \FilesystemIterator::FOLLOW_SYMLINKS),
             \RecursiveIteratorIterator::SELF_FIRST
@@ -109,8 +100,23 @@ class ClassesScanner extends \Magento\Setup\Module\Di\Code\Reader\ClassesScanner
                     continue 2;
                 }
             }
-            $fileScanner = new FileClassScanner($fileItemPath);
-            $classNames = $fileScanner->getClassNames();
+
+            //XXX
+            if(substr_count($fileItemPath, 'Rugento')) {
+                $classNames = [];
+                if(stripos($fileItemPath, 'Interface') === false && !substr_count($fileItemPath, 'registration.php')) {
+                    $explode = explode('Rugento', $fileItemPath);
+                    $className = '\Rugento'.str_replace(['.php','/'], ['','\\'], $explode[1]);
+                    if(class_exists($className)) {
+                        $classNames = [$className];
+                    }
+                }
+            } else {
+                $fileScanner = new FileClassScanner($fileItemPath);
+                $classNames = $fileScanner->getClassNames();
+            }
+            //XXX
+
             $this->includeClasses($classNames, $fileItemPath);
             $classes = array_merge($classes, $classNames);
         }
