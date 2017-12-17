@@ -3,22 +3,6 @@ namespace Ioncube\Di\Code\Reader;
 
 class ClassReader extends \Magento\Framework\Code\Reader\ClassReader
 {
-
-    /**
-     * @var \Magento\Framework\Module\Dir\Reader
-     */
-    protected $moduleReader;
-
-    /**
-     * @param \Magento\Framework\Module\Dir\Reader $moduleReader
-     */
-    public function __construct(
-        \Magento\Framework\Module\Dir\Reader $moduleReader
-        ) {
-            $this->moduleReader = $moduleReader;
-    }
-
-
     /**
      * Read class constructor signature
      *
