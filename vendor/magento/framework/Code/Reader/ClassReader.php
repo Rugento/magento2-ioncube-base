@@ -21,8 +21,8 @@ class ClassReader implements ClassReaderInterface
         $constructor = $class->getConstructor();
         if ($constructor) {
             $result = [];
-
-            //XXX
+            
+             //XXX
             $classType = explode('\\', $className);
             if (count($classType) > 1 && !in_array($classType[0], ['Magento', 'Composer', 'Symfony'])) {
                 if($class->hasMethod('__precompile')) {
@@ -30,17 +30,15 @@ class ClassReader implements ClassReaderInterface
                 }
             }
             //XXX
-
+            
             /** @var $parameter \ReflectionParameter */
             foreach ($constructor->getParameters() as $parameter) {
                 try {
                     $result[] = [
                         $parameter->getName(),
                         $parameter->getClass() !== null ? $parameter->getClass()->getName() : null,
-                        !$parameter->isOptional(),
-                        $parameter->isOptional()
-                            ? ($parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null)
-                            : null,
+                        !$parameter->isOptional() && !$parameter->isDefaultValueAvailable(),
+                        $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null,
                     ];
                 } catch (\ReflectionException $e) {
                     $message = $e->getMessage();

@@ -97,4 +97,27 @@ class Interceptor extends \Magento\Framework\Interception\Code\Generator\Interce
         }
         return $parameter->getDefaultValue();
     }
+    
+    /**
+     * @param array $parameters
+     * @return string
+     */
+    protected function _getParameterList(array $parameters)
+    {
+        return implode(
+            ', ',
+            array_map(
+                function ($item) {
+                    $output = '';
+                    if (isset($item['variadic']) && $item['variadic']) {
+                        $output .= '... ';
+                    }
+
+                    $output .= "\${$item['name']}";
+                    return $output;
+                },
+                $parameters
+            )
+        );
+    }
 }
